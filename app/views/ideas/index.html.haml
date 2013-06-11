@@ -1,0 +1,25 @@
+%section.listing
+  / - if can? :manage, :all
+  = link_to "Add", new_idea_path, class: "button button-primary"
+
+  %h1 Ideas
+
+  %table
+    %thead
+      %tr
+        %th Title
+        %th Description
+        %th User
+        %th Published
+        %th &nbsp;
+    %tbody
+      - @ideas.each do |idea|
+        %tr
+          %td= idea.title
+          %td= idea.description
+          %td= idea.user_id
+          %td= idea.published
+          %td
+            = link_to "View", idea, class: "button button-inverse"
+            / - if can? :manage, :all
+            = link_to "Edit", edit_idea_path(idea), class: "button button-primary"

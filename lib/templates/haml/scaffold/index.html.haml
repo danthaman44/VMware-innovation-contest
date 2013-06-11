@@ -1,0 +1,23 @@
+%section.listing
+  - if can? :manage, :all
+    = link_to "Add", new_<%= singular_table_name %>_path, class: "button button-primary"
+
+  %h1 <%= plural_table_name.titleize %>
+
+  %table
+    %thead
+      %tr
+<% attributes.each do |attribute| -%>
+        %th <%= attribute.human_name.titleize %>
+<% end -%>
+        %th &nbsp;
+    %tbody
+      - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+        %tr
+<% attributes.each_with_index do |attribute, i| -%>
+          %td= <%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+          %td
+            = link_to "View", <%= singular_table_name %>, class: "button button-inverse"
+            - if can? :manage, :all
+              = link_to "Edit", edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "button button-primary"

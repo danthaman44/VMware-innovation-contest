@@ -1,0 +1,27 @@
+= link_to "View All Ideas", ideas_path, class: "button button-primary"
+/ - if can? :manage, :all
+= link_to "Edit", edit_idea_path(@idea), class: "button button-inverse"
+
+%h1 Idea
+
+.row
+  .span2
+    %h4 Title
+  .span10
+    %span= @idea.title
+.row
+  .span2
+    %h4 Description
+  .span10
+    %span= @idea.description
+.row
+  .span2
+    %h4 User
+  .span10
+    %span= @idea.user_id
+.row
+  .span2
+    %h4 Published
+  .span10
+    %span= @idea.published
+ 

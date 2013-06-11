@@ -1,0 +1,18 @@
+= form_for @<%= singular_table_name %> do |f|
+
+  .row
+    .span12
+      = render partial: "globals/form_errors", locals: { object: @<%= singular_table_name %> }
+
+<% attributes.each do |attribute| -%>
+  .row
+    .span2
+      = f.label :<%= attribute.name %>, class: "required"
+    .span2
+      = f.<%= attribute.field_type %> :<%= attribute.name %><%= attribute.field_type.to_s == "text_area" ? ", rows: 4" : "" %>
+<% end -%>
+
+  .row
+    .span12
+      = render partial: "globals/form_buttons",
+                        locals: { f: f, cancel_path: <%= table_name %>_path, object: @<%= singular_table_name %> }
