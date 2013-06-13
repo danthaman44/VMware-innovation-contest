@@ -1,16 +1,29 @@
 %section.listing
-  - if can? :manage, :all
-    = link_to "Add", new_<%= singular_table_name %>_path, class: "button button-primary"
 
   %h1 <%= plural_table_name.titleize %>
 
-  %table
+  .row
+    .grid2
+      = link_to "Add", new_<%= singular_table_name %>_path, class: "button button-primary"
+    .grid3.offset6
+      %input#search-field{:placeholder => "Search Ideas", :type => "text"}
+    .offset8
+      = link_to "Search", '', class: "button"
+
+
+  
+
+  %table.table-condensed.table-bordered.table-striped
     %thead
       %tr
-<% attributes.each do |attribute| -%>
+<% attributes.each do |attribute, i| -%> 
         %th <%= attribute.human_name.titleize %>
 <% end -%>
         %th &nbsp;
+
+
+
+
     %tbody
       - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
         %tr
@@ -21,3 +34,5 @@
             = link_to "View", <%= singular_table_name %>, class: "button button-inverse"
             - if can? :manage, :all
               = link_to "Edit", edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "button button-primary"
+
+  = will_paginate @ideas

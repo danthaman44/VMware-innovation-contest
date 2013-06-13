@@ -1,8 +1,9 @@
-= link_to "View All Ideas", ideas_path, class: "button button-primary"
-/ - if can? :manage, :all
-= link_to "Edit", edit_idea_path(@idea), class: "button button-inverse"
+%h3= render_crumbs
+
+
 
 %h1 Idea
+= link_to "Edit", edit_idea_path(@idea), class: "button button-inverse"
 
 .row
   .span2

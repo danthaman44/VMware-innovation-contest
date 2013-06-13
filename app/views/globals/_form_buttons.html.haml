@@ -1,5 +1,4 @@
 .form-buttons
-  = f.submit "Submit", class: "btn btn-primary"
-  = link_to "Cancel", cancel_path, class: "btn"
-  / - if !f.object.new_record? && can?(:destroy, f.object)
-  = link_to "delete", object, confirm: "Are you sure?", method: "delete"
+  = f.submit "Submit", class: "button secondary"
+  = link_to "Cancel", cancel_path, class: "button"
+  = link_to "Delete", object, confirm: "Are you sure?", method: "delete"

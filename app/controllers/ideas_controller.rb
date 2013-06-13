@@ -1,24 +1,30 @@
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
+  add_crumb("Ideas") { |instance| instance.send :ideas_path }
+
 
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.all
+    # @ideas = Idea.all
+    @ideas = Idea.paginate(page: params[:page])
   end
 
   # GET /ideas/1
   # GET /ideas/1.json
   def show
+    add_crumb @idea.title, @ideas
   end
 
   # GET /ideas/new
   def new
+    add_crumb "New Idea", @ideas
     @idea = Idea.new
   end
 
   # GET /ideas/1/edit
   def edit
+    add_crumb @idea.title, @ideas
   end
 
   # POST /ideas
