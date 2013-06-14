@@ -13,5 +13,6 @@
   new_idea = Idea.find_or_create_by(title: t)
   new_idea.published = true
   new_idea.description = "This is a sample idea"
+  new_idea.user_id = 1
   new_idea.save
 end

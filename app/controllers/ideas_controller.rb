@@ -1,70 +1,52 @@
+
 class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   add_crumb("Ideas") { |instance| instance.send :ideas_path }
-
-
   # GET /ideas
-  # GET /ideas.json
   def index
-    # @ideas = Idea.all
-    @ideas = Idea.paginate(page: params[:page])
+  	@ideas = Idea.paginate(:page => params[:page])
   end
 
   # GET /ideas/1
-  # GET /ideas/1.json
   def show
-    add_crumb @idea.title, @ideas
+  	add_crumb @idea.title, @ideas
   end
 
   # GET /ideas/new
   def new
-    add_crumb "New Idea", @ideas
     @idea = Idea.new
+    add_crumb  "New Idea", @ideas
   end
 
   # GET /ideas/1/edit
   def edit
-    add_crumb @idea.title, @ideas
+  	add_crumb @idea.title, @ideas
   end
 
   # POST /ideas
-  # POST /ideas.json
   def create
     @idea = Idea.new(idea_params)
 
-    respond_to do |format|
-      if @idea.save
-        format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @idea }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
-      end
+    if @idea.save
+      redirect_to @idea, notice: 'Idea was successfully created.'
+    else
+      render action: 'new'
     end
   end
 
   # PATCH/PUT /ideas/1
-  # PATCH/PUT /ideas/1.json
   def update
-    respond_to do |format|
-      if @idea.update(idea_params)
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
-      end
+    if @idea.update(idea_params)
+      redirect_to @idea, notice: 'Idea was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   # DELETE /ideas/1
-  # DELETE /ideas/1.json
   def destroy
     @idea.destroy
-    respond_to do |format|
-      format.html { redirect_to ideas_url }
-      format.json { head :no_content }
-    end
+    redirect_to ideas_url, notice: 'Idea was successfully destroyed.'
   end
 
   private

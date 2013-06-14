@@ -1,38 +1,46 @@
 %section.listing
 
   %h1 Ideas
-  
+
   .row
-    .grid2 
+    .grid2
       = link_to "Add", new_idea_path, class: "button secondary"
     .grid3.offset6
-      %input#search-field{:placeholder => "Search Ideas", :type => "text"}
-    .offest8
+      %input#search-field{:placeholder => "Search", :type => "text"}
+    .offset8
       = link_to "Search", '', class: "button"
+
+
   
- 
- 
 
   %table.table-condensed.table-bordered.table-striped
     %thead
       %tr
-        %th Title   
+ 
+        %th Title
+ 
         %th Description
+ 
         %th User
+ 
         %th Published
-        %th
+        %th &nbsp;
+
+
+
 
     %tbody
       - @ideas.each do |idea|
         %tr
-          %td= link_to idea.title, idea 
+      
+          %td= link_to idea.title, idea
+            
           %td= idea.description
+            
           %td= idea.user_id
+            
           %td= t idea.published.class
-          %td 
-            / - if can? :manage, :all
-            = link_to "Edit", edit_idea_path(idea), class: "button button-primary"
+          
+          %td= link_to "Edit", edit_idea_path(idea), class: "button button-primary"
 
   = will_paginate @ideas
-
- 

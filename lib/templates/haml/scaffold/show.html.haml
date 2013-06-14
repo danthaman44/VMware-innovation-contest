@@ -1,8 +1,7 @@
-= link_to "<%= 'View All ' + table_name.titleize %>", <%= table_name %>_path, class: "button button-primary"
-- if can? :manage, :all
-  = link_to "Edit", edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "button button-inverse"
+%h3= render_crumbs
 
 %h1 <%= singular_table_name.titleize %>
+= link_to "Edit", edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "button button-inverse"
 
 <% attributes.each do |attribute| -%>
 .row
