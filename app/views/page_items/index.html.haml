@@ -1,0 +1,46 @@
+%section.listing
+
+  %h1 Page Items
+
+  .row
+    .grid2
+      = link_to "Add", new_page_item_path, class: "button secondary"
+    .grid3.offset6
+      %input#search-field{:placeholder => "Search", :type => "text"}
+    .offset8
+      = link_to "Search", '', class: "button"
+
+
+  
+
+  %table.table-condensed.table-bordered.table-striped
+    %thead
+      %tr
+ 
+        %th Order
+ 
+        %th Content
+ 
+        %th Published
+ 
+        %th User
+        %th &nbsp;
+
+
+
+
+    %tbody
+      - @page_items.each do |page_item|
+        %tr
+      
+          %td= link_to page_item.order, page_item
+            
+          %td= page_item.content
+            
+          %td= t page_item.published.class
+            
+          %td= page_item.user_id
+          
+          %td= link_to "Edit", edit_page_item_path(page_item), class: "button button-primary"
+
+  = will_paginate @page_items

@@ -1,4 +1,18 @@
 InnovationContest::Application.routes.draw do
+  resources :posts
+
+  resources :page_items
+
+  resources :pages
+
+  resources :likes
+
+  resources :comments
+
+  resources :attachments
+
+  resources :users
+
   resources :ideas
 
   # The priority is based upon order of creation: first created -> highest priority.

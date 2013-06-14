@@ -1,0 +1,26 @@
+%h3= render_crumbs
+
+%h1 Comment
+= link_to "Edit", edit_comment_path(@comment), class: "button button-inverse"
+
+.row
+  .span2
+    %h4 Body
+  .span10
+    %span= @comment.body
+.row
+  .span2
+    %h4 User
+  .span10
+    %span= @comment.user_id
+.row
+  .span2
+    %h4 Idea
+  .span10
+    %span= @comment.idea_id
+.row
+  .span2
+    %h4 Published
+  .span10
+    %span= @comment.published
+ 

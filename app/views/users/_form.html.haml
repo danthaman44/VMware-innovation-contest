@@ -1,0 +1,56 @@
+= form_for @user do |f|
+
+  .row
+    .span12
+      = render partial: "globals/form_errors", locals: { object: @user }
+
+  .row
+    .span2
+      = f.label :name, class: "required"
+    .span2
+      = f.text_field :name
+  .row
+    .span2
+      = f.label :email, class: "required"
+    .span2
+      = f.text_field :email
+  .row
+    .span2
+      = f.label :password, class: "required"
+    .span2
+      = f.text_field :password
+  .row
+    .span2
+      = f.label :job_title, class: "required"
+    .span2
+      = f.text_field :job_title
+  .row
+    .span2
+      = f.label :phone, class: "required"
+    .span2
+      = f.number_field :phone
+  .row
+    .span2
+      = f.label :expertise, class: "required"
+    .span2
+      = f.text_field :expertise
+  .row
+    .span2
+      = f.label :email_notification_comment, class: "required"
+    .span2
+      = f.check_box :email_notification_comment
+  .row
+    .span2
+      = f.label :email_notification_news, class: "required"
+    .span2
+      = f.check_box :email_notification_news
+  .row
+    .span2
+      = f.label :is_admin, class: "required"
+    .span2
+      = f.check_box :is_admin
+
+  .row
+    .span12
+      = render partial: "globals/form_buttons",
+                        locals: { f: f, cancel_path: users_path, object: @user }

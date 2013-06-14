@@ -1,0 +1,42 @@
+%section.listing
+
+  %h1 Pages
+
+  .row
+    .grid2
+      = link_to "Add", new_page_path, class: "button secondary"
+    .grid3.offset6
+      %input#search-field{:placeholder => "Search", :type => "text"}
+    .offset8
+      = link_to "Search", '', class: "button"
+
+
+  
+
+  %table.table-condensed.table-bordered.table-striped
+    %thead
+      %tr
+ 
+        %th Name
+ 
+        %th Content
+ 
+        %th User
+        %th &nbsp;
+
+
+
+
+    %tbody
+      - @pages.each do |page|
+        %tr
+      
+          %td= link_to page.name, page
+            
+          %td= page.content
+            
+          %td= page.user_id
+          
+          %td= link_to "Edit", edit_page_path(page), class: "button button-primary"
+
+  = will_paginate @pages

@@ -1,0 +1,46 @@
+%section.listing
+
+  %h1 Comments
+
+  .row
+    .grid2
+      = link_to "Add", new_comment_path, class: "button secondary"
+    .grid3.offset6
+      %input#search-field{:placeholder => "Search", :type => "text"}
+    .offset8
+      = link_to "Search", '', class: "button"
+
+
+  
+
+  %table.table-condensed.table-bordered.table-striped
+    %thead
+      %tr
+ 
+        %th Body
+ 
+        %th User
+ 
+        %th Idea
+ 
+        %th Published
+        %th &nbsp;
+
+
+
+
+    %tbody
+      - @comments.each do |comment|
+        %tr
+      
+          %td= link_to comment.body, comment
+            
+          %td= comment.user_id
+            
+          %td= comment.idea_id
+            
+          %td= t comment.published.class
+          
+          %td= link_to "Edit", edit_comment_path(comment), class: "button button-primary"
+
+  = will_paginate @comments

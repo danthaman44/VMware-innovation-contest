@@ -1,0 +1,31 @@
+= form_for @page_item do |f|
+
+  .row
+    .span12
+      = render partial: "globals/form_errors", locals: { object: @page_item }
+
+  .row
+    .span2
+      = f.label :order, class: "required"
+    .span2
+      = f.number_field :order
+  .row
+    .span2
+      = f.label :content, class: "required"
+    .span2
+      = f.text_area :content, rows: 4
+  .row
+    .span2
+      = f.label :published, class: "required"
+    .span2
+      = f.check_box :published
+  .row
+    .span2
+      = f.label :user_id, class: "required"
+    .span2
+      = f.number_field :user_id
+
+  .row
+    .span12
+      = render partial: "globals/form_buttons",
+                        locals: { f: f, cancel_path: page_items_path, object: @page_item }

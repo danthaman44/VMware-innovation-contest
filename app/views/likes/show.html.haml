@@ -1,0 +1,16 @@
+%h3= render_crumbs
+
+%h1 Like
+= link_to "Edit", edit_like_path(@like), class: "button button-inverse"
+
+.row
+  .span2
+    %h4 User
+  .span10
+    %span= @like.user_id
+.row
+  .span2
+    %h4 Idea
+  .span10
+    %span= @like.idea_id
+ 

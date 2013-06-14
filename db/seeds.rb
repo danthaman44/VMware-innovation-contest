@@ -16,3 +16,15 @@
   new_idea.user_id = 1
   new_idea.save
 end
+
+# Create some users
+["Dexter", "Geoff", "Danny", "Dan"].each do |t|
+  new_user = User.find_or_create_by(name: t)
+  new_user.email = "dand@vmware.com"
+  new_user.password = "pw"
+  new_user.job_title = "VMware Employee"
+  new_user.expertise = "Coding"
+  new_user.phone = 18006666666
+  new_user.is_admin = true
+  new_user.save
+end

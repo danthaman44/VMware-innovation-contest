@@ -9,7 +9,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # GET <%= route_url %>/1
   def show
-  	add_crumb @<%= singular_table_name %>.title, @<%=plural_table_name %>
+  	add_crumb @<%= singular_table_name %>.<%= attributes.first.name %>, @<%=plural_table_name %>
   end
 
   # GET <%= route_url %>/new
@@ -20,7 +20,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # GET <%= route_url %>/1/edit
   def edit
-  	add_crumb @<%= singular_table_name %>.title, @<%=plural_table_name %>
+  	add_crumb @<%= singular_table_name %>.<%= attributes.first.name %>, @<%=plural_table_name %>
   end
 
   # POST <%= route_url %>

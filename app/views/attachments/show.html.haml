@@ -1,0 +1,31 @@
+%h3= render_crumbs
+
+%h1 Attachment
+= link_to "Edit", edit_attachment_path(@attachment), class: "button button-inverse"
+
+.row
+  .span2
+    %h4 File Name
+  .span10
+    %span= @attachment.file_name
+.row
+  .span2
+    %h4 Location
+  .span10
+    %span= @attachment.location
+.row
+  .span2
+    %h4 File Size
+  .span10
+    %span= @attachment.file_size
+.row
+  .span2
+    %h4 Idea
+  .span10
+    %span= @attachment.idea_id
+.row
+  .span2
+    %h4 Published
+  .span10
+    %span= @attachment.published
+ 

@@ -1,0 +1,50 @@
+%section.listing
+
+  %h1 Attachments
+
+  .row
+    .grid2
+      = link_to "Add", new_attachment_path, class: "button secondary"
+    .grid3.offset6
+      %input#search-field{:placeholder => "Search", :type => "text"}
+    .offset8
+      = link_to "Search", '', class: "button"
+
+
+  
+
+  %table.table-condensed.table-bordered.table-striped
+    %thead
+      %tr
+ 
+        %th File Name
+ 
+        %th Location
+ 
+        %th File Size
+ 
+        %th Idea
+ 
+        %th Published
+        %th &nbsp;
+
+
+
+
+    %tbody
+      - @attachments.each do |attachment|
+        %tr
+      
+          %td= link_to attachment.file_name, attachment
+            
+          %td= attachment.location
+            
+          %td= attachment.file_size
+            
+          %td= attachment.idea_id
+            
+          %td= t attachment.published.class
+          
+          %td= link_to "Edit", edit_attachment_path(attachment), class: "button button-primary"
+
+  = will_paginate @attachments

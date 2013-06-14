@@ -1,0 +1,26 @@
+%h3= render_crumbs
+
+%h1 Page Item
+= link_to "Edit", edit_page_item_path(@page_item), class: "button button-inverse"
+
+.row
+  .span2
+    %h4 Order
+  .span10
+    %span= @page_item.order
+.row
+  .span2
+    %h4 Content
+  .span10
+    %span= @page_item.content
+.row
+  .span2
+    %h4 Published
+  .span10
+    %span= @page_item.published
+.row
+  .span2
+    %h4 User
+  .span10
+    %span= @page_item.user_id
+ 

@@ -1,0 +1,21 @@
+= form_for @like do |f|
+
+  .row
+    .span12
+      = render partial: "globals/form_errors", locals: { object: @like }
+
+  .row
+    .span2
+      = f.label :user_id, class: "required"
+    .span2
+      = f.number_field :user_id
+  .row
+    .span2
+      = f.label :idea_id, class: "required"
+    .span2
+      = f.number_field :idea_id
+
+  .row
+    .span12
+      = render partial: "globals/form_buttons",
+                        locals: { f: f, cancel_path: likes_path, object: @like }
