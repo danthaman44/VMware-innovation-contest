@@ -1,26 +1,43 @@
-
 class <%= controller_class_name %>Controller < ApplicationController
+  load_and_authorize_resource
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
   add_crumb("<%= plural_table_name.titleize%>") { |instance| instance.send :<%= plural_table_name %>_path }
+
   # GET <%= route_url %>
   def index
-  	@<%= plural_table_name %> = <%= singular_table_name.titleize %>.paginate(:page => params[:page])
+    @<%= plural_table_name %> = <%= singular_table_name.camelize %>.paginate(page: params[:page])
   end
 
   # GET <%= route_url %>/1
   def show
-  	add_crumb @<%= singular_table_name %>.<%= attributes.first.name %>, @<%=plural_table_name %>
+<% if controller_class_name == "Comments" -%>
+    add_crumb @<%= singular_table_name %>.content
+<% elsif attributes.map(&:"name").include?("name") -%>
+    add_crumb @<%= singular_table_name %>.name
+<% elsif attributes.map(&:"name").include?("title") -%>
+    add_crumb @<%= singular_table_name %>.title
+<% else -%>
+    add_crumb @<%= singular_table_name %>.<%= attributes.first.name %>
+<% end -%>
   end
 
   # GET <%= route_url %>/new
   def new
     @<%= singular_table_name %> = <%= orm_class.build(class_name) %>
-    add_crumb  "New <%= singular_table_name.titleize %>", @<%=plural_table_name %>
+    add_crumb "Add a New <%= singular_table_name.titleize%>"
   end
 
   # GET <%= route_url %>/1/edit
   def edit
-  	add_crumb @<%= singular_table_name %>.<%= attributes.first.name %>, @<%=plural_table_name %>
+<% if controller_class_name == "Comments" -%>
+    add_crumb @<%= singular_table_name %>.content
+<% elsif attributes.map(&:"name").include?("name") -%>
+    add_crumb @<%= singular_table_name %>.name
+<% elsif attributes.map(&:"name").include?("title") -%>
+    add_crumb @<%= singular_table_name %>.title
+<% else -%>
+    add_crumb @<%= singular_table_name %>.<%= attributes.first.name %>
+<% end -%>
   end
 
   # POST <%= route_url %>
@@ -28,7 +45,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= singular_table_name %> = <%= orm_class.build(class_name, "#{singular_table_name}_params") %>
 
     if @<%= orm_instance.save %>
-      redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully created.'" %>
+      redirect_to @<%= singular_table_name %>, flash: { success: <%= "'The #{human_name.downcase} was successfully created.'" %> }
     else
       render action: 'new'
     end
@@ -37,7 +54,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # PATCH/PUT <%= route_url %>/1
   def update
     if @<%= orm_instance.update("#{singular_table_name}_params") %>
-      redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully updated.'" %>
+      redirect_to @<%= singular_table_name %>, flash: { success: <%= "'The #{human_name.downcase} was successfully updated.'" %> }
     else
       render action: 'edit'
     end
@@ -46,7 +63,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # DELETE <%= route_url %>/1
   def destroy
     @<%= orm_instance.destroy %>
-    redirect_to <%= index_helper %>_url, notice: <%= "'#{human_name} was successfully destroyed.'" %>
+    redirect_to <%= index_helper %>_url, flash: { success: <%= "'The #{human_name.downcase} was successfully deleted.'" %> }
   end
 
   private

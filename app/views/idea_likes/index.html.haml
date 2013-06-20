@@ -1,0 +1,30 @@
+%section.listing
+
+  %h1 Idea Likes
+
+  .row
+    .grid8
+      - if can? :create, IdeaLike
+        = link_to "Add a Idea Like", new_idea_like_path, class: "button secondary"
+    .grid2
+      %input#search-field{placeholder: "Search", type: "text"}
+    .grid2
+      = link_to "Search", idea_likes_path, class: "button"
+
+  %table.table-condensed.table-bordered.table-striped
+    %thead
+      %tr
+        %th User
+        %th Idea
+
+    %tbody
+      - @idea_likes.each do |idea_like|
+        %tr
+          %td
+            - if can? :update, idea_like
+              = link_to "Edit", edit_idea_like_path(idea_like), class: "button"
+            = idea_like.user_id
+          %td
+            = idea_like.idea_id
+
+  = pagination_links(@idea_likes)

@@ -3,40 +3,37 @@
   %h1 Pages
 
   .row
+    .grid8
+      - if can? :create, Page
+        = link_to "Add a Page", new_page_path, class: "button secondary"
     .grid2
-      = link_to "Add", new_page_path, class: "button secondary"
-    .grid3.offset6
-      %input#search-field{:placeholder => "Search", :type => "text"}
-    .offset8
-      = link_to "Search", '', class: "button"
-
-
-  
+      %input#search-field{placeholder: "Search", type: "text"}
+    .grid2
+      = link_to "Search", pages_path, class: "button"
 
   %table.table-condensed.table-bordered.table-striped
     %thead
       %tr
- 
-        %th Name
- 
-        %th Content
- 
         %th User
-        %th &nbsp;
-
-
-
+        %th Title
+        %th Content
+        %th Sort Order
+        %th Published
 
     %tbody
       - @pages.each do |page|
         %tr
-      
-          %td= link_to page.name, page
-            
-          %td= page.content
-            
-          %td= page.user_id
-          
-          %td= link_to "Edit", edit_page_path(page), class: "button button-primary"
+          %td
+            - if can? :update, page
+              = link_to "Edit", edit_page_path(page), class: "button"
+            = page.user_id
+          %td
+            = link_to page.title, page
+          %td
+            = page.content
+          %td
+            = page.sort_order
+          %td
+            = t page.published.class
 
-  = will_paginate @pages
+  = pagination_links(@pages)

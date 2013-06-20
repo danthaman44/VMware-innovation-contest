@@ -1,0 +1,36 @@
+%section.listing
+
+  %h1 Idea Comments
+
+  .row
+    .grid8
+      - if can? :create, IdeaComment
+        = link_to "Add a Idea Comment", new_idea_comment_path, class: "button secondary"
+    .grid2
+      %input#search-field{placeholder: "Search", type: "text"}
+    .grid2
+      = link_to "Search", idea_comments_path, class: "button"
+
+  %table.table-condensed.table-bordered.table-striped
+    %thead
+      %tr
+        %th User
+        %th Idea
+        %th Content
+        %th Published
+
+    %tbody
+      - @idea_comments.each do |idea_comment|
+        %tr
+          %td
+            - if can? :update, idea_comment
+              = link_to "Edit", edit_idea_comment_path(idea_comment), class: "button"
+            = idea_comment.user_id
+          %td
+            = idea_comment.idea_id
+          %td
+            = idea_comment.content
+          %td
+            = t idea_comment.published.class
+
+  = pagination_links(@idea_comments)

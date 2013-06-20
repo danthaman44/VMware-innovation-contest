@@ -3,64 +3,49 @@
   %h1 Users
 
   .row
+    .grid8
+      - if can? :create, User
+        = link_to "Add a User", new_user_path, class: "button secondary"
     .grid2
-      = link_to "Add", new_user_path, class: "button secondary"
-    .grid3.offset6
-      %input#search-field{:placeholder => "Search", :type => "text"}
-    .offset8
-      = link_to "Search", '', class: "button"
-
-
-  
+      %input#search-field{placeholder: "Search", type: "text"}
+    .grid2
+      = link_to "Search", users_path, class: "button"
 
   %table.table-condensed.table-bordered.table-striped
     %thead
       %tr
- 
         %th Name
- 
         %th Email
- 
         %th Password
- 
         %th Job Title
- 
         %th Phone
- 
-        %th Expertise
- 
-        %th Email Notification Comment
- 
-        %th Email Notification News
- 
+        %th Technical Expertise
+        %th Email Idea Comments
+        %th Email News
         %th Is Admin
-        %th &nbsp;
-
-
-
 
     %tbody
       - @users.each do |user|
         %tr
-      
-          %td= link_to user.name, user
-            
-          %td= user.email
-            
-          %td= user.password
-            
-          %td= user.job_title
-            
-          %td= user.phone
-            
-          %td= user.expertise
-            
-          %td= t user.email_notification_comment.class
-            
-          %td= t user.email_notification_news.class
-            
-          %td= t user.is_admin.class
-          
-          %td= link_to "Edit", edit_user_path(user), class: "button button-primary"
+          %td
+            - if can? :update, user
+              = link_to "Edit", edit_user_path(user), class: "button"
+            = link_to user.name, user
+          %td
+            = user.email
+          %td
+            = user.password
+          %td
+            = user.job_title
+          %td
+            = user.phone
+          %td
+            = user.technical_expertise
+          %td
+            = t user.email_idea_comments.class
+          %td
+            = t user.email_news.class
+          %td
+            = t user.is_admin.class
 
-  = will_paginate @users
+  = pagination_links(@users)

@@ -1,26 +1,27 @@
-
 class PostsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   add_crumb("Posts") { |instance| instance.send :posts_path }
+
   # GET /posts
   def index
-  	@posts = Post.paginate(:page => params[:page])
+    @posts = Post.paginate(page: params[:page])
   end
 
   # GET /posts/1
   def show
-  	add_crumb @post.name, @posts
+    add_crumb @post.title
   end
 
   # GET /posts/new
   def new
     @post = Post.new
-    add_crumb  "New Post", @posts
+    add_crumb "Add a New Post"
   end
 
   # GET /posts/1/edit
   def edit
-  	add_crumb @post.name, @posts
+    add_crumb @post.title
   end
 
   # POST /posts
@@ -28,7 +29,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to @post, flash: { success: 'The post was successfully created.' }
     else
       render action: 'new'
     end
@@ -37,7 +38,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to @post, flash: { success: 'The post was successfully updated.' }
     else
       render action: 'edit'
     end
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   def destroy
     @post.destroy
-    redirect_to posts_url, notice: 'Post was successfully destroyed.'
+    redirect_to posts_url, flash: { success: 'The post was successfully deleted.' }
   end
 
   private
@@ -57,6 +58,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :content, :published, :user_id)
+      params.require(:post).permit(:user_id, :title, :content, :published)
     end
 end

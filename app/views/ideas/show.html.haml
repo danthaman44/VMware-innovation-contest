@@ -1,26 +1,24 @@
-%h3= render_crumbs
-
 %h1 Idea
-= link_to "Edit", edit_idea_path(@idea), class: "button button-inverse"
+- if can? :update, @idea
+  = link_to "Edit", edit_idea_path(@idea), class: "button"
 
 .row
-  .span2
-    %h4 Title
-  .span10
-    %span= @idea.title
-.row
-  .span2
-    %h4 Description
-  .span10
-    %span= @idea.description
-.row
-  .span2
+  .grid2
     %h4 User
-  .span10
+  .grid10
     %span= @idea.user_id
 .row
-  .span2
+  .grid2
+    %h4 Title
+  .grid10
+    %span= @idea.title
+.row
+  .grid2
+    %h4 Description
+  .grid10
+    %span= @idea.description
+.row
+  .grid2
     %h4 Published
-  .span10
+  .grid10
     %span= @idea.published
- 

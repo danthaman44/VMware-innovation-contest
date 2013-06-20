@@ -1,0 +1,33 @@
+%section.listing
+
+  %h1 Idea Files
+
+  .row
+    .grid8
+      - if can? :create, IdeaFile
+        = link_to "Add a Idea File", new_idea_file_path, class: "button secondary"
+    .grid2
+      %input#search-field{placeholder: "Search", type: "text"}
+    .grid2
+      = link_to "Search", idea_files_path, class: "button"
+
+  %table.table-condensed.table-bordered.table-striped
+    %thead
+      %tr
+        %th Idea
+        %th File
+        %th Published
+
+    %tbody
+      - @idea_files.each do |idea_file|
+        %tr
+          %td
+            - if can? :update, idea_file
+              = link_to "Edit", edit_idea_file_path(idea_file), class: "button"
+            = idea_file.idea_id
+          %td
+            = idea_file.file
+          %td
+            = t idea_file.published.class
+
+  = pagination_links(@idea_files)

@@ -1,0 +1,19 @@
+%h1 Idea File
+- if can? :update, @idea_file
+  = link_to "Edit", edit_idea_file_path(@idea_file), class: "button"
+
+.row
+  .grid2
+    %h4 Idea
+  .grid10
+    %span= @idea_file.idea_id
+.row
+  .grid2
+    %h4 File
+  .grid10
+    %span= @idea_file.file
+.row
+  .grid2
+    %h4 Published
+  .grid10
+    %span= @idea_file.published

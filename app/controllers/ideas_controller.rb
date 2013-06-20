@@ -1,26 +1,27 @@
-
 class IdeasController < ApplicationController
+  load_and_authorize_resource
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   add_crumb("Ideas") { |instance| instance.send :ideas_path }
+
   # GET /ideas
   def index
-  	@ideas = Idea.paginate(:page => params[:page])
+    @ideas = Idea.paginate(page: params[:page])
   end
 
   # GET /ideas/1
   def show
-  	add_crumb @idea.title, @ideas
+    add_crumb @idea.title
   end
 
   # GET /ideas/new
   def new
     @idea = Idea.new
-    add_crumb  "New Idea", @ideas
+    add_crumb "Add a New Idea"
   end
 
   # GET /ideas/1/edit
   def edit
-  	add_crumb @idea.title, @ideas
+    add_crumb @idea.title
   end
 
   # POST /ideas
@@ -28,7 +29,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
 
     if @idea.save
-      redirect_to @idea, notice: 'Idea was successfully created.'
+      redirect_to @idea, flash: { success: 'The idea was successfully created.' }
     else
       render action: 'new'
     end
@@ -37,7 +38,7 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1
   def update
     if @idea.update(idea_params)
-      redirect_to @idea, notice: 'Idea was successfully updated.'
+      redirect_to @idea, flash: { success: 'The idea was successfully updated.' }
     else
       render action: 'edit'
     end
@@ -46,7 +47,7 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1
   def destroy
     @idea.destroy
-    redirect_to ideas_url, notice: 'Idea was successfully destroyed.'
+    redirect_to ideas_url, flash: { success: 'The idea was successfully deleted.' }
   end
 
   private
@@ -57,6 +58,6 @@ class IdeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
-      params.require(:idea).permit(:title, :description, :user_id, :published)
+      params.require(:idea).permit(:user_id, :title, :description, :published)
     end
 end

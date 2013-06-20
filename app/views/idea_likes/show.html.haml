@@ -1,0 +1,14 @@
+%h1 Idea Like
+- if can? :update, @idea_like
+  = link_to "Edit", edit_idea_like_path(@idea_like), class: "button"
+
+.row
+  .grid2
+    %h4 User
+  .grid10
+    %span= @idea_like.user_id
+.row
+  .grid2
+    %h4 Idea
+  .grid10
+    %span= @idea_like.idea_id

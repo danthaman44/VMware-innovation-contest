@@ -1,64 +1,19 @@
-%footer{:role => "content-info"}
+%footer{role: "content-info"}
   .container
     %nav
       %ul.cf
-        %li
-          %a{:href => "http://labs.vmware.com/"} Home
-        %li
-          %a{:href => "http://labs.vmware.com/flings"} Flings
-        %li
-          %a{:href => "http://labs.vmware.com/academic"} Academic
-        %li
-          %a{:href => "http://labs.vmware.com/about"} About
-        %li
-          %a{:href => "http://labs.vmware.com/contact-us"} Contact
+        - [{ title: "Home", url: "labs.vmware.com" },
+           { title: "Flings", url: "labs.vmware.com/flings" },
+           { title: "Academic", url: "labs.vmware.com/academic" },
+           { title: "About", url: "labs.vmware.com/about" }].each do |li_item|
+          %li
+            = link_to(li_item[:title], "http://#{li_item[:url]}")
+
     .social-icons
-      %a{:href => "", :target => "_blank", :title => "Facebook"} 
-        %i.icon-facebook
-        Facebook
-      %a{:href => "", :target => "_blank", :title => "Twitter"} 
-        %i.icon-twitter
-        Twitter
-      %a{:href => "", :target => "_blank", :title => "Google Plus"} 
-        %i.icon-google-plus
-        Google  
-      %a{:href => "", :target => "_blank", :title => "Twitter"} 
-        %i.icon-github
-        Github
-    / .social-icons
-    .copyright
-      \©2013 VMware, Inc.
-      %br/
-      %a{:href => "/terms-of-use"} Terms
-      \•
-      %a{:href => "http://www.vmware.com/help/privacy.html", :target => "_blank"} Privacy
-      \•
-      %a{:href => "http://www.vmware.com/help/legal.html", :target => "_blank"} Legal
-    / .copyright
-    %script{:src => "http://labs.vmware.com/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.32.0-2013.04.03", :type => "text/javascript"}
-    :javascript
-      /*  */
-      var _wpcf7 = {"loaderUrl":"http:\/\/labs.vmware.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ...","cached":"1"};
-      /*  */
-    %script{:src => "http://labs.vmware.com/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=3.4.1", :type => "text/javascript"}
-    :javascript
-      /*  */
-      var emailL10n = {"ajax_url":"http:\/\/labs.vmware.com\/wp-admin\/admin-ajax.php","max_allowed":"10","text_error":"The Following Error Occurs:","text_name_invalid":"- Your Name is empty\/invalid","text_email_invalid":"- Your Email is empty\/invalid","text_remarks_invalid":"- Your Remarks is invalid","text_friend_names_empty":"- Friend Name(s) is empty","text_friend_name_invalid":"- Friend Name is empty\/invalid: ","text_max_friend_names_allowed":"- Maximum 10 Friend Names allowed","text_friend_emails_empty":"- Friend Email(s) is empty","text_friend_email_invalid":"- Friend Email is invalid: ","text_max_friend_emails_allowed":"- Maximum 10 Friend Emails allowed","text_friends_tally":"- Friend Name(s) count does not tally with Friend Email(s) count","text_image_verify_empty":"- Image Verification is empty"};
-      /*  */
-    %script{:src => "http://labs.vmware.com/wp-content/plugins/wp-email/email-js.js?ver=2.60", :type => "text/javascript"}
-    :javascript
-      /*  */
-      var ratingsL10n = {"plugin_url":"http:\/\/labs.vmware.com\/wp-content\/plugins\/wp-postratings","ajax_url":"http:\/\/labs.vmware.com\/wp-admin\/admin-ajax.php","text_wait":"Please rate only 1 post at a time.","image":"stars","image_ext":"gif","max":"5","show_loading":"0","show_fading":"1","custom":"0"};
-      var ratings_mouseover_image=new Image();ratings_mouseover_image.src=ratingsL10n.plugin_url+"/images/"+ratingsL10n.image+"/rating_over."+ratingsL10n.image_ext;;
-      /*  */
-    %script{:src => "http://labs.vmware.com/wp-content/plugins/wp-postratings/postratings-js.js?ver=1.63", :type => "text/javascript"}
-    %script{:src => "http://labs.vmware.com/wp-content/themes/vmware-labs-3/js/jquery.flexslider-min.js?ver=3.5.1", :type => "text/javascript"}
-    / stats_footer_test
-    %script{:src => "http://stats.wordpress.com/e-201324.js", :type => "text/javascript"}
-    :javascript
-      st_go({blog:'12523231',v:'ext',post:'0'});
-      var load_cmc = function(){linktracker_init(12523231,0,2);};
-      if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
-      else load_cmc();
-  / .container
-/ footer
+    - [{ title: "Facebook" },
+       { title: "Twitter" },
+       { title: "Google-plus" },
+       { title: "Github" }].each do |item|
+      = link_to item[:title], class: "social-icons" do
+        %i{class: "icon-#{item[:title]}".downcase}
+        = item[:title]

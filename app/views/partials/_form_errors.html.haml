@@ -1,0 +1,6 @@
+- if object.errors.any?
+  .form-errors.alert.alert-error
+    %strong Whoops-a-daisy!
+    %ul
+    - object.errors.full_messages.each do |msg|
+      %li= msg

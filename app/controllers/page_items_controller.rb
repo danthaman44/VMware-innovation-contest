@@ -1,26 +1,27 @@
-
 class PageItemsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_page_item, only: [:show, :edit, :update, :destroy]
   add_crumb("Page Items") { |instance| instance.send :page_items_path }
+
   # GET /page_items
   def index
-  	@page_items = Page Item.paginate(:page => params[:page])
+    @page_items = PageItem.paginate(page: params[:page])
   end
 
   # GET /page_items/1
   def show
-  	add_crumb @page_item.order, @page_items
+    add_crumb @page_item.title
   end
 
   # GET /page_items/new
   def new
     @page_item = PageItem.new
-    add_crumb  "New Page Item", @page_items
+    add_crumb "Add a New Page Item"
   end
 
   # GET /page_items/1/edit
   def edit
-  	add_crumb @page_item.order, @page_items
+    add_crumb @page_item.title
   end
 
   # POST /page_items
@@ -28,7 +29,7 @@ class PageItemsController < ApplicationController
     @page_item = PageItem.new(page_item_params)
 
     if @page_item.save
-      redirect_to @page_item, notice: 'Page item was successfully created.'
+      redirect_to @page_item, flash: { success: 'The page item was successfully created.' }
     else
       render action: 'new'
     end
@@ -37,7 +38,7 @@ class PageItemsController < ApplicationController
   # PATCH/PUT /page_items/1
   def update
     if @page_item.update(page_item_params)
-      redirect_to @page_item, notice: 'Page item was successfully updated.'
+      redirect_to @page_item, flash: { success: 'The page item was successfully updated.' }
     else
       render action: 'edit'
     end
@@ -46,7 +47,7 @@ class PageItemsController < ApplicationController
   # DELETE /page_items/1
   def destroy
     @page_item.destroy
-    redirect_to page_items_url, notice: 'Page item was successfully destroyed.'
+    redirect_to page_items_url, flash: { success: 'The page item was successfully deleted.' }
   end
 
   private
@@ -57,6 +58,6 @@ class PageItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_item_params
-      params.require(:page_item).permit(:order, :content, :published, :user_id)
+      params.require(:page_item).permit(:user_id, :title, :content, :sort_order, :published)
     end
 end

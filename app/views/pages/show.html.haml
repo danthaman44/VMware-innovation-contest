@@ -1,21 +1,29 @@
-%h3= render_crumbs
-
 %h1 Page
-= link_to "Edit", edit_page_path(@page), class: "button button-inverse"
+- if can? :update, @page
+  = link_to "Edit", edit_page_path(@page), class: "button"
 
 .row
-  .span2
-    %h4 Name
-  .span10
-    %span= @page.name
+  .grid2
+    %h4 User
+  .grid10
+    %span= @page.user_id
 .row
-  .span2
+  .grid2
+    %h4 Title
+  .grid10
+    %span= @page.title
+.row
+  .grid2
     %h4 Content
-  .span10
+  .grid10
     %span= @page.content
 .row
-  .span2
-    %h4 User
-  .span10
-    %span= @page.user_id
- 
+  .grid2
+    %h4 Sort Order
+  .grid10
+    %span= @page.sort_order
+.row
+  .grid2
+    %h4 Published
+  .grid10
+    %span= @page.published

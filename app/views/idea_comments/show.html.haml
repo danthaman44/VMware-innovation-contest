@@ -1,0 +1,24 @@
+%h1 Idea Comment
+- if can? :update, @idea_comment
+  = link_to "Edit", edit_idea_comment_path(@idea_comment), class: "button"
+
+.row
+  .grid2
+    %h4 User
+  .grid10
+    %span= @idea_comment.user_id
+.row
+  .grid2
+    %h4 Idea
+  .grid10
+    %span= @idea_comment.idea_id
+.row
+  .grid2
+    %h4 Content
+  .grid10
+    %span= @idea_comment.content
+.row
+  .grid2
+    %h4 Published
+  .grid10
+    %span= @idea_comment.published

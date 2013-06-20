@@ -1,51 +1,49 @@
-%h3= render_crumbs
-
 %h1 User
-= link_to "Edit", edit_user_path(@user), class: "button button-inverse"
+- if can? :update, @user
+  = link_to "Edit", edit_user_path(@user), class: "button"
 
 .row
-  .span2
+  .grid2
     %h4 Name
-  .span10
+  .grid10
     %span= @user.name
 .row
-  .span2
+  .grid2
     %h4 Email
-  .span10
+  .grid10
     %span= @user.email
 .row
-  .span2
+  .grid2
     %h4 Password
-  .span10
+  .grid10
     %span= @user.password
 .row
-  .span2
+  .grid2
     %h4 Job Title
-  .span10
+  .grid10
     %span= @user.job_title
 .row
-  .span2
+  .grid2
     %h4 Phone
-  .span10
+  .grid10
     %span= @user.phone
 .row
-  .span2
-    %h4 Expertise
-  .span10
-    %span= @user.expertise
+  .grid2
+    %h4 Technical Expertise
+  .grid10
+    %span= @user.technical_expertise
 .row
-  .span2
-    %h4 Email Notification Comment
-  .span10
-    %span= @user.email_notification_comment
+  .grid2
+    %h4 Email Idea Comments
+  .grid10
+    %span= @user.email_idea_comments
 .row
-  .span2
-    %h4 Email Notification News
-  .span10
-    %span= @user.email_notification_news
+  .grid2
+    %h4 Email News
+  .grid10
+    %span= @user.email_news
 .row
-  .span2
+  .grid2
     %h4 Is Admin
-  .span10
+  .grid10
     %span= @user.is_admin
- 

@@ -2,11 +2,11 @@ source 'https://rubygems.org'
 
 gem 'thin'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc2'
+gem 'rails', '4.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0.rc1'
+gem 'sass-rails', '~> 4.0.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -18,13 +18,19 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.0.1'
+gem 'jbuilder'
 # Use postgres db
 gem 'pg'
 # Pagination
 gem 'will_paginate'
 # Breadcrumbs
-gem "crummy", "~> 1.7.2"
+gem 'crummy', '~> 1.7.2'
+# Attribute mass assignment
+gem 'protected_attributes'
+# Access control
+gem 'cancan'
+# File attachments
+gem 'carrierwave'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -32,7 +38,7 @@ group :doc do
 end
 
 # gem "haml", ">= 3.1.6"
-gem "haml-rails" #, git: "https://github.com/indirect/haml-rails"
+gem 'haml-rails' #, git: "https://github.com/indirect/haml-rails"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

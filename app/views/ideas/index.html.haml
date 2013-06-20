@@ -3,44 +3,34 @@
   %h1 Ideas
 
   .row
+    .grid8
+      - if can? :create, Idea
+        = link_to "Add a Idea", new_idea_path, class: "button secondary"
     .grid2
-      = link_to "Add", new_idea_path, class: "button secondary"
-    .grid3.offset6
-      %input#search-field{:placeholder => "Search", :type => "text"}
-    .offset8
-      = link_to "Search", '', class: "button"
-
-
-  
+      %input#search-field{placeholder: "Search", type: "text"}
+    .grid2
+      = link_to "Search", ideas_path, class: "button"
 
   %table.table-condensed.table-bordered.table-striped
     %thead
       %tr
- 
-        %th Title
- 
-        %th Description
- 
         %th User
- 
+        %th Title
+        %th Description
         %th Published
-        %th &nbsp;
-
-
-
 
     %tbody
       - @ideas.each do |idea|
         %tr
-      
-          %td= link_to idea.title, idea
-            
-          %td= idea.description
-            
-          %td= idea.user_id
-            
-          %td= t idea.published.class
-          
-          %td= link_to "Edit", edit_idea_path(idea), class: "button button-primary"
+          %td
+            - if can? :update, idea
+              = link_to "Edit", edit_idea_path(idea), class: "button"
+            = idea.user_id
+          %td
+            = link_to idea.title, idea
+          %td
+            = idea.description
+          %td
+            = t idea.published.class
 
-  = will_paginate @ideas
+  = pagination_links(@ideas)

@@ -1,19 +1,12 @@
 InnovationContest::Application.routes.draw do
-  resources :posts
-
-  resources :page_items
-
-  resources :pages
-
-  resources :likes
-
-  resources :comments
-
-  resources :attachments
-
   resources :users
-
   resources :ideas
+  resources :idea_comments
+  resources :idea_files
+  resources :idea_likes
+  resources :pages
+  resources :page_items
+  resources :posts
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

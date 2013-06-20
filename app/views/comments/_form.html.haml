@@ -1,31 +1,31 @@
 = form_for @comment do |f|
 
   .row
-    .span12
-      = render partial: "globals/form_errors", locals: { object: @comment }
+    .grid12
+      = render partial: "partials/form_errors", locals: { object: @comment }
 
   .row
-    .span2
-      = f.label :body, class: "required"
-    .span2
-      = f.text_area :body, rows: 4
-  .row
-    .span2
+    .grid2
       = f.label :user_id, class: "required"
-    .span2
+    .grid10
       = f.number_field :user_id
   .row
-    .span2
+    .grid2
       = f.label :idea_id, class: "required"
-    .span2
+    .grid10
       = f.number_field :idea_id
   .row
-    .span2
+    .grid2
+      = f.label :content, class: "required"
+    .grid10
+      = f.text_area :content, rows: 4
+  .row
+    .grid2
       = f.label :published, class: "required"
-    .span2
+    .grid10
       = f.check_box :published
 
   .row
-    .span12
-      = render partial: "globals/form_buttons",
+    .grid10.offset2
+      = render partial: "partials/form_buttons",
                         locals: { f: f, cancel_path: comments_path, object: @comment }

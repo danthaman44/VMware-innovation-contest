@@ -11,65 +11,78 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130614203837) do
+ActiveRecord::Schema.define(version: 20130701202402) do
 
-  create_table "attachments", force: true do |t|
-    t.string   "file_name"
-    t.text     "location"
-    t.integer  "file_size"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
     t.integer  "idea_id"
+    t.text     "content"
     t.boolean  "published"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "comments", force: true do |t|
-    t.text     "body"
+  create_table "idea_comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "idea_id"
+    t.text     "content"
     t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "idea_files", force: true do |t|
+    t.integer  "idea_id"
+    t.string   "file"
+    t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "idea_likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "idea_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "ideas", force: true do |t|
+    t.integer  "user_id"
     t.string   "title"
     t.text     "description"
-    t.integer  "user_id"
     t.boolean  "published"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "likes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "idea_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "page_items", force: true do |t|
-    t.integer  "order"
-    t.text     "content"
-    t.boolean  "published"
     t.integer  "user_id"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "sort_order"
+    t.boolean  "published"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "pages", force: true do |t|
-    t.string   "name"
-    t.text     "content"
     t.integer  "user_id"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "sort_order"
+    t.boolean  "published"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "posts", force: true do |t|
-    t.string   "name"
+    t.integer  "user_id"
+    t.string   "title"
     t.text     "content"
     t.boolean  "published"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,10 +92,10 @@ ActiveRecord::Schema.define(version: 20130614203837) do
     t.string   "email"
     t.string   "password"
     t.string   "job_title"
-    t.integer  "phone"
-    t.string   "expertise"
-    t.boolean  "email_notification_comment"
-    t.boolean  "email_notification_news"
+    t.string   "phone"
+    t.text     "technical_expertise"
+    t.boolean  "email_idea_comments"
+    t.boolean  "email_news"
     t.boolean  "is_admin"
     t.datetime "created_at"
     t.datetime "updated_at"
