@@ -31,7 +31,7 @@ class Ability
     if user.is_admin
       can :manage, :all
     else
-      can :create, [Idea, IdeaLike, Comment, IdeaFile, User]
+      can :create, [Idea, IdeaLike, IdeaComment, IdeaFile, User]
       can :read, [Idea, User, Page, Post]
       can :update, Idea, user_id: user.id
       can :update, User, id: user.id
